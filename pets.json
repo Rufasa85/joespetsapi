@@ -1,0 +1,32 @@
+[
+    {
+        "id":1,
+        "name":"Shiva",
+        "species":"cat",
+        "owner":"Joe"
+    },
+    {
+        "id":2,
+        "name":"Bahamut",
+        "species":"cat",
+        "owner":"Joe"
+    },
+    {
+        "id":3,
+        "name":"Bear",
+        "species":"dog",
+        "owner":"Maya"
+    },
+    {
+        "id":4,
+        "name":"Puppy",
+        "species":"dog",
+        "owner":"Joe"
+    },
+    {
+        "id":5,
+        "name":"Cocoa",
+        "species":"dog",
+        "owner":"Joe"
+    }
+]
