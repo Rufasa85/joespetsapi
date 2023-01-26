@@ -2,7 +2,7 @@ const express = require("express");
 const app  = express();
 const path = require("path")
 
-const pets=require("./pets.json")
+const petsData=require("./pets.json")
 
 
 app.use(express.static("public"))
@@ -12,13 +12,17 @@ app.get("/",(req,res)=>{
 })
 
 app.get("/pets",(req,res)=>{
-    res.json(pets)
+    res.json(petsData)
+})
+
+app.post("/pets",(req,res)=>{
+    res.send("post request recieved")
 })
 
 
 app.get("/pets/:id",(req,res)=>{
-    for (let i = 0; i < pets.length; i++) {
-        const pet = pets[i];
+    for (let i = 0; i < petsData.length; i++) {
+        const pet = petsData[i];
         console.log(req.params)
         if(pet.id==req.params.id){
             return res.json(pet)
