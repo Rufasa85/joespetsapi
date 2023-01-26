@@ -28,5 +28,11 @@
         "name":"Cocoa",
         "species":"dog",
         "owner":"Joe"
+    },
+    {
+        "id":6,
+        "name":"Franklin",
+        "species":"cat",
+        "owner":"Jason"
     }
 ]
