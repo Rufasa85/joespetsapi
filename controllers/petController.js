@@ -9,6 +9,8 @@ router.get("/", (req, res) => {
         throw err;
       } else {
         const petsData = JSON.parse(data);
+        console.log("here are the pets!")
+        console.log(petsData)
         res.json(petsData);
       }
     });
