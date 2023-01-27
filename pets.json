@@ -1,9 +1,9 @@
 [
     {
         "id": 1,
-        "name": "Shiva",
-        "species": "cat",
-        "owner": "Joe"
+        "name": "Shiva Koopa Ebersten-Rehfuss",
+        "species": "cat-like creature",
+        "owner": "no one, Shiva is the boss!"
     },
     {
         "id": 2,
@@ -16,12 +16,6 @@
         "name": "Bear",
         "species": "dog",
         "owner": "Maya"
-    },
-    {
-        "id": 4,
-        "name": "Puppy",
-        "species": "dog",
-        "owner": "Joe"
     },
     {
         "id": 5,
