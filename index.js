@@ -8,118 +8,16 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(express.static("public"));
 
+const petRoutes = require("./controllers/petController")
+app.use("/pets",petRoutes)
+
+const friendRoutes = require("./controllers/friendsController")
+app.use("/friends",friendRoutes)
+
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "./views/index.html"));
 });
 
-app.get("/pets", (req, res) => {
-  fs.readFile("./pets.json", "utf-8", (err, data) => {
-    if (err) {
-      res.status(500).send("oh no!");
-      throw err;
-    } else {
-      const petsData = JSON.parse(data);
-      res.json(petsData);
-    }
-  });
-});
-
-app.post("/pets", (req, res) => {
-  fs.readFile("./pets.json", "utf-8", (err, data) => {
-    if (err) {
-      res.status(500).send("oh no!");
-      throw err;
-    } else {
-      const petsData = JSON.parse(data);
-      petsData.push(req.body);
-      fs.writeFile("./pets.json", JSON.stringify(petsData, null, 4), (err) => {
-        if (err) {
-          res.status(500).send("oh no!");
-          throw err;
-        } else {
-          res.send("data added!");
-        }
-      });
-    }
-  });
-});
-
-app.get("/pets/:id", (req, res) => {
-    fs.readFile("./pets.json", "utf-8", (err, data) => {
-        if (err) {
-          res.status(500).send("oh no!");
-          throw err;
-        } else {
-          const petsData = JSON.parse(data);
-          for (let i = 0; i < petsData.length; i++) {
-            const pet = petsData[i];
-            if (pet.id == req.params.id) {
-              return res.json(pet);
-            }
-          }
-          return res.send("no such pet");
-        }
-      });
-});
-
-app.put("/pets/:id", (req, res) => {
-    fs.readFile("./pets.json", "utf-8", (err, data) => {
-        if (err) {
-          res.status(500).send("oh no!");
-          throw err;
-        } else {
-          let petsData = JSON.parse(data);
-          petsData = petsData.map((pet) => {
-            if (pet.id == req.params.id) {
-              return {
-                id: req.body.id,
-                name: req.body.name,
-                species: req.body.species,
-                owner: req.body.owner,
-              };
-            } else {
-              return pet;
-            }
-          });
-          fs.writeFile("./pets.json", JSON.stringify(petsData, null, 4), (err) => {
-            if (err) {
-              res.status(500).send("oh no!");
-              throw err;
-            } else {
-              res.send("data updated!");
-            }
-          });
-        }
-      });
-});
-
-app.delete("/pets/:id", (req, res) => {
-    fs.readFile("./pets.json", "utf-8", (err, data) => {
-        if (err) {
-          res.status(500).send("oh no!");
-          throw err;
-        } else {
-          let petsData = JSON.parse(data);
-          petsData = petsData.filter((pet) => {
-            if (pet.id == req.params.id) {
-              return false;
-            } else {
-              return true;
-            }
-          });
-          fs.writeFile("./pets.json", JSON.stringify(petsData, null, 4), (err) => {
-            if (err) {
-              res.status(500).send("oh no!");
-              throw err;
-            } else {
-              res.send("data deleted!");
-            }
-          });
-        }
-      });
- 
-
-});
 
 app.listen(3000, function () {
   console.log("listenin on port 3000!");

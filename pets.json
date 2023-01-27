@@ -52,5 +52,11 @@
         "name": "Penny",
         "species": "dog",
         "owner": "Emma"
+    },
+    {
+        "id": 12,
+        "name": "HDT",
+        "species": "fish",
+        "owner": "joe"
     }
 ]
