@@ -2,8 +2,10 @@ const express = require("express");
 const app  = express();
 const path = require("path")
 
-const petsData=require("./pets.json")
+let petsData=require("./pets.json")
 
+app.use(express.json())
+app.use(express.urlencoded({extended:true}))
 
 app.use(express.static("public"))
 
@@ -16,14 +18,14 @@ app.get("/pets",(req,res)=>{
 })
 
 app.post("/pets",(req,res)=>{
+    console.log(req.body);
+    petsData.push(req.body)
     res.send("post request recieved")
 })
-
 
 app.get("/pets/:id",(req,res)=>{
     for (let i = 0; i < petsData.length; i++) {
         const pet = petsData[i];
-        console.log(req.params)
         if(pet.id==req.params.id){
             return res.json(pet)
         }
@@ -31,6 +33,34 @@ app.get("/pets/:id",(req,res)=>{
     return res.send("no such pet")
 })
 
+app.put("/pets/:id",(req,res)=>{
+    petsData = petsData.map(pet=>{
+        if(pet.id==req.params.id){
+            return {
+                id:req.body.id,
+                name:req.body.name,
+                species:req.body.species,
+                owner:req.body.owner
+            }
+        } else {
+            return pet
+        }
+    })
+    res.send("updated")
+})
+
+app.delete("/pets/:id",(req,res)=>{
+    petsData = petsData.filter(pet=>{
+        if(pet.id==req.params.id){
+            return false
+        } else {
+            return true
+        }
+    })
+    res.send("pet deleted!")
+})
+
 app.listen(3000,function(){
     console.log("listenin on port 3000!")
 })
+
